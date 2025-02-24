@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Appointments List</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0-alpha1/css/bootstrap.min.css">
+</head>
+<body>
+
+<div class="container mt-5">
+    <h2>Appointments List</h2>
+
+    <a href="/appointments/add" class="btn btn-primary mb-3">Add Appointment</a>
+
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>Appointment Date</th>
+                <th>Status</th>
+                <th>Doctor</th>
+                <th>Patient</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr th:each="appointment : ${appointments}">
+                <td th:text="${appointment.appointmentDate}"></td>
+                <td th:text="${appointment.status}"></td>
+                <td th:text="${appointment.doctor.name}"></td>
+                <td th:text="${appointment.patient.name}"></td>
+                <td>
+                    <a th:href="@{/appointments/cancel/{id}(id=${appointment.id})}" class="btn btn-warning btn-sm">Cancel</a>
+                    <a th:href="@{/appointments/delete/{id}(id=${appointment.id})}" class="btn btn-danger btn-sm">Delete</a>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+
+</body>
+</html>
